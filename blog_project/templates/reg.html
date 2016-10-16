@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href='{% static "css/reglogin.css" %}' rel='stylesheet' type='text/css'/>
+    <script type="text/javascript" src={% static 'js/jquery.min.js' %}></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <h1>注册账户!</h1>
+    </div>
+    <p></p>
+    <form method="post" action="{% url 'register' %}"> {% csrf_token %}
+        <ul class="left-form">
+            <h2>New Account:</h2>
+            {% for field in regform %}
+                <li class="reg_li">
+                    {{ field }}
+                    {#                    <a href="#" class="icon ticker"> </a>#}
+                    <div class="clear">{{ field.errors }}</div>
+                </li>
+
+            {% endfor %}
+            <input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
+            <input type="submit" value="注册">
+            <div class="clear"></div>
+        </ul>
+        <div class="clear"><a href="{% url 'login' %}">已有账号登录</a></div>
+
+    </form>
+    <script>
+        $(function () {
+            var id_password1 = $('#id_password1');
+            var id_password = $('#id_password');
+            var clear_li = id_password1.closest('li').find('.clear');
+            var password_blur = function () {
+                var password = id_password.val().length;
+                var password1 = id_password1.val().length;
+                if (password != 0 && password1 != 0 && password != password1) {
+                    clear_li.text('您输入的密码不一致');
+                }
+            };
+            var password_click = function () {
+                clear_li.text('');
+            };
+            id_password.blur(password_blur);
+            id_password1.blur(password_blur);
+            id_password1.click(password_click);
+            id_password.click(password_click);
+        })
+    </script>
+</div>
+</body>
+</html>

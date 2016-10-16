@@ -1,0 +1,26 @@
+<div id="commentform">
+    <button class="comment_exit">X</button>
+    <h3 class="response">Add your comment now</h3>
+
+    {% if not request.user.is_authenticated %}
+        <div class='login_info'>登录后享有更多精彩。<big><a href="{% url 'login' %}">&raquo;去登录</a>&nbsp;<a
+                href="{% url 'register' %}">&raquo;还没有账号，去注册</a></big>
+        </div>
+    {% endif %}
+    <form action="{% url 'comment' %}" method="post" id="commentform">{% csrf_token %}
+        <ul>
+            {% if not request.user.is_authenticated %}
+                <li>{{ comment_form.username }}{{ comment_form.username.label }}</li>
+                <li>{{ comment_form.email }}{{ comment_form.email.label }}</li>
+                <li>{{ comment_form.url }}{{ comment_form.url.label }}</li>
+            {% endif %}
+            <li>{{ comment_form.content }}</li>
+            <li>{{ comment_form.article }}</li>
+            <li>{{ comment_form.pid }}</li>
+            <li>{{ comment_form.rid }}</li>
+            <li><input name="pid2" type="hidden" id="pid2" tabindex="5"/></li>
+            <li><input name="submit" type="submit" id="submit" tabindex="5" value="提交" class="button"/></li>
+        </ul>
+        <!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code class=&quot;&quot; title=&quot;&quot; data-url=&quot;&quot;&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; &lt;pre class=&quot;&quot; title=&quot;&quot; data-url=&quot;&quot;&gt; &lt;span class=&quot;&quot; title=&quot;&quot; data-url=&quot;&quot;&gt; </small></p>-->
+    </form>
+</div>

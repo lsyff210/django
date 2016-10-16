@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<header>
+    <div class="logo">
+        <h1>{{ SITE_NAME }}</h1>
+        <p>{{ SITE_DESC }}</p>
+    </div>
+    <nav id="topnav" class="f_r">
+        <ul>
+            <a href="{% url 'index' %}" target="_parent">首页</a>
+            {% for catogery in category_list %}
+                <a href="{% url 'category' %}?category_get={{ catogery.id }}" target="_parent">{{ catogery.name }}</a>
+            {% endfor %}
+
+        </ul>
+        <script src={% static "js/nav.js" %}></script>
+    </nav>
+</header>

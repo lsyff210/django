@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_left_content %}
+    {% include 'include/ad.html' %}
+    <div class="topnews">
+        <h2>{{ title }}</h2>
+        {% block article_list %} {% include 'include/article_list.html' %}  {% endblock article_list %}
+    </div>
+    {% include 'include/pagination.html' %}
+{% endblock custom_left_content %}

@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<link href='{% static "css/reglogin.css" %}' rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="main">
+		<div class="header" >
+			<h1>登录!</h1>
+		</div>
+		<p>{{ login_error }}</p>
+			<form action="{% url 'login' %}" method="post"> {% csrf_token %}
+				<ul class="right-form">
+					<h2>Login:</h2>
+                    {% for field in login_form  %}
+                        <li>{{ field }}</li>
+                        <div class="clear"> {{ field.errors }}</div>
+                    {% endfor %}
+{#					<li><input type="text" placeholder="Username" required/></li>#}
+{#					<li><input type="password" placeholder="Password" required/></li>#}
+                    <input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
+					<input type="submit" value="登录" >
+					<div class="clear"><a href="{% url 'register' %}">还没有账号，赶紧注册吧</a></div>
+				</ul>
+				<div class="clear"> </div>
+			</form>
+	</div>
+</body>
+</html>

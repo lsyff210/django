@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<div class="banner">
+    <div id="slide-holder">
+        <div id="slide-runner">
+            {% for ad in ad_list %}
+                <a href="/" class="ad_class" target="_blank">
+                    <img id="slide-img-{{ ad.index }}" src="{{ ad.image_url.url }}" alt="{{ ad.title }}"/>
+                </a>
+            {% endfor %}
+            <div id="slide-controls">
+                <p id="slide-client" class="text"><strong></strong><span></span></p>
+                <p id="slide-desc" class="text"></p>
+                <p id="slide-nav"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        if (!window.slider) {
+            var slider = {};
+        }
+
+        var dict = [];
+
+        {% for ad1 in ad_list %}
+            var ad_class = {};
+            ad_class['id'] = "slide-img-{{ ad1.index }}";
+            ad_class['client'] = "{{ ad1.title }}";
+{#            ad_class['desc'] = "{{ ad1.description }}";#}
+            ad_class['desc'] = "";
+            dict.push(ad_class);
+        {% endfor %}
+
+        slider.data = dict;
+
+{#        slider.data = [#}
+{#            {% for ad1 in ad_list %}#}
+{#                {#}
+{#                    "id": "slide-img-{{ ad1.index }}", // 与slide-runner中的img标签id对应#}
+{#                    "client": "{{ ad1.title }}",#}
+{#                    "desc": "{{ ad1.description }}" //这里修改描述#}
+{#                }#}
+{#            {% endfor %}#}
+{#        ];#}
+
+    </script>
+</div>
+<!-- banner代码 结束 -->

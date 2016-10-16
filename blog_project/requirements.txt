@@ -1,0 +1,9 @@
+Django==1.8.2
+enum==0.4.6
+grizzled-python==1.0.1
+Pillow==3.3.1
+prettytable==0.7.2
+PyMySQL==0.7.9
+PyYAML==3.12
+sqlcmd==0.7.1
+Werkzeug==0.11.11
